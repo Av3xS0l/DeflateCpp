@@ -5,9 +5,9 @@
 int main();
 
 
-void compress(std::string inFile, std::string outFile);
+void compress(const std::string& inFile, const std::string& outFile);
 
-void decompress(std::string inFile, std::string outFile);
+void decompress(const std::string& inFile, const std::string& outFile);
 
 
 #endif //DEFLATE_LIBRARY_H

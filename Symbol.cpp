@@ -57,17 +57,15 @@ int Symbol::recoverValue() {
     if (this->type == 1) {
             if (this->code == 285) {
                 return 258;
-            } else if (this->extra == 0) {
-                return this->code - 254;
-            } else {
-                return 3 + (1 << (this->extra + 2)) + ((this->code - 265) % 4) * (1 << this->extra) + this->extraValue;
             }
-        } else {
             if (this->extra == 0) {
-                return this->code + 1;
-            } else {
-                return 1 + (1 << (this->extra + 1)) + ((this->code - 4) % 2) * (1 << this->extra) + this->extraValue;
+                return this->code - 254;
             }
-        }
+            return 3 + (1 << (this->extra + 2)) + ((this->code - 265) % 4) * (1 << this->extra) + this->extraValue;
+    }
+    if (this->extra == 0) {
+        return this->code + 1;
+    }
+    return 1 + (1 << (this->extra + 1)) + ((this->code - 4) % 2) * (1 << this->extra) + this->extraValue;
 }
 
