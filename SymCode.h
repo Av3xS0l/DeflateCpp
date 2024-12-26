@@ -2,11 +2,11 @@
 // Created by av3xs0l on 12/20/24.
 //
 
-#ifndef SYMBOL_H
-#define SYMBOL_H
+#ifndef SYMCODE_H
+#define SYMCODE_H
 
 
-class Symbol {
+class SymCode {
 private:
     int code;
     int extra = 0;
@@ -18,12 +18,10 @@ private:
     void symDis(int value);
 
 public:
-    Symbol(int type, int value);
+    SymCode(int type, int value);
 
-    Symbol(int type, int code, int extra, int extraValue);
-
-    int recoverValue();
+    static int recoverValue(int type, int code, int extra, int extraValue);
 };
 
 
-#endif //SYMBOL_H
+#endif //SYMCODE_H

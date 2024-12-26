@@ -7,8 +7,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(Deflate Main.h Main.cpp
         LZ77.cpp
         LZ77.h
-        Symbol.cpp
-        Symbol.h
+        SymCode.cpp
+        SymCode.h
         HuffmanNode.cpp
         HuffmanNode.h
         DataReader.cpp

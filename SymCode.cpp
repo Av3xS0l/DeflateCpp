@@ -2,10 +2,10 @@
 // Created by av3xs0l on 12/20/24.
 //
 
-#include "Symbol.h"
+#include "SymCode.h"
 #include <cmath>
 
-Symbol::Symbol(const int type, const int value) {
+SymCode::SymCode(const int type, const int value) {
     this->type = type;
     switch (type) {
         case 0:
@@ -21,14 +21,8 @@ Symbol::Symbol(const int type, const int value) {
     }
 }
 
-Symbol::Symbol(const int type, const int code, const int extra, const int extraValue) {
-    this->type = type;
-    this->code = code;
-    this->extra = extra;
-    this->extraValue = extraValue;
-}
 
-void Symbol::symLen(const int value) {
+void SymCode::symLen(const int value) {
     if (value + 3 == 258) {
         this->code = 285;
     } else {
@@ -42,7 +36,7 @@ void Symbol::symLen(const int value) {
     }
 }
 
-void Symbol::symDis(const int value) {
+void SymCode::symDis(const int value) {
     if (value < 4) {
         this->code = value;
     } else {
@@ -53,19 +47,16 @@ void Symbol::symDis(const int value) {
     }
 }
 
-int Symbol::recoverValue() {
-    if (this->type == 1) {
-            if (this->code == 285) {
+int SymCode::recoverValue(const int type, const int code, const int extra, const int extraValue) {
+    if (type == 1) {
+            if (code == 285) {
                 return 258;
             }
-            if (this->extra == 0) {
-                return this->code - 254;
+            if (extra == 0) {
+                return code - 254;
             }
-            return 3 + (1 << (this->extra + 2)) + ((this->code - 265) % 4) * (1 << this->extra) + this->extraValue;
+            return 3 + (1 << (extra + 2)) + ((code - 265) % 4) * (1 << extra) + extraValue;
     }
-    if (this->extra == 0) {
-        return this->code + 1;
-    }
-    return 1 + (1 << (this->extra + 1)) + ((this->code - 4) % 2) * (1 << this->extra) + this->extraValue;
+    return 1 + (1 << (extra + 1)) + ((code - 4) % 2) * (1 << extra) + extraValue;
 }
 
